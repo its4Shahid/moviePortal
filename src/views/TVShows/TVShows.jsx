@@ -7,15 +7,18 @@ import GenericTab from '../../components/GenericTab';
 import {
     getPopularTvShowsRequest,
     getTopRatedTvShowsRequest,
+    searchTvShowRequest,
     setTVShowsRequest,
 } from '../../store/actions/tvshowActions';
 import { Link } from 'react-router-dom';
+import PageLoader from '../../components/PajeLoader/PajeLoader';
+import GenericTextField from '../../components/TextField';
+import GenericButton from '../../components/Button';
 
 const TVShows = () => {
-    const data = useSelector((state) => state.TVShows.tvShows);
+    const { tvShows, isLoading } = useSelector((state) => state.TVShows);
     const dispatch = useDispatch();
-    const [open, setOpen] = useState(false);
-    const [showDetail, setShowDetail] = useState({});
+    const [input, setInput] = useState('');
     const [showType, setShowType] = useState('all'); //all,trending,recent movie type
     useEffect(() => {
         if (showType === 'all') {
@@ -24,21 +27,11 @@ const TVShows = () => {
             dispatch(getPopularTvShowsRequest());
         } else if (showType === 'topRated') {
             dispatch(getTopRatedTvShowsRequest());
+        } else if (showType === 'search') {
+            dispatch(searchTvShowRequest(input));
         }
     }, [showType]);
 
-    // const handleOnclick = (event) => {
-    //     const id = event.currentTarget.id;
-    //     setShowDetail(
-    //         data.find((item) => {
-    //             return `${item.id}` === `${id}`;
-    //         }),
-    //     );
-    //     setOpen(true);
-    // };
-    const handleClose = () => {
-        setOpen(false);
-    };
     const getAllHandler = () => {
         setShowType('all');
     };
@@ -48,25 +41,44 @@ const TVShows = () => {
     const getLatestHandler = () => {
         setShowType('topRated');
     };
+    const handleChange = (event) => {
+        setInput(event.target.value);
+    };
+    const handleClick = () => {
+        setShowType('search');
+    };
     return (
         <>
-            {/* <MoviesModal open={open} handleClose={handleClose} showDetail={showDetail} /> */}
             <Grid container justifyContent="center" spacing={3}>
                 <Grid item xs={11}>
                     <Grid container justifyContent="center">
-                        <Grid item>
-                            <GenericTab
-                                all="ALL TV SHOWS"
-                                popular="POPULAR TV SHOWS"
-                                latest="TOP RATED"
-                                getAllHandler={getAllHandler}
-                                getPopularHandler={getPopularHandler}
-                                getLatestHandler={getLatestHandler}
-                            />
+                        <Grid container justifyContent="center">
+                            <Grid item xs={12}>
+                                <Grid item xs={8} sm={10} lg={8}>
+                                    <GenericTextField handleChange={handleChange} placeHolder="Search" />
+                                </Grid>
+                                <Grid item xs={4} sm={2} lg={4}>
+                                    <GenericButton handleClick={handleClick} input={input} title="Search" />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid container justifyContent="center">
+                            <Grid item>
+                                {isLoading && <PageLoader />}
+                                <GenericTab
+                                    all="ALL TV SHOWS"
+                                    popular="POPULAR TV SHOWS"
+                                    latest="TOP RATED"
+                                    getAllHandler={getAllHandler}
+                                    getPopularHandler={getPopularHandler}
+                                    getLatestHandler={getLatestHandler}
+                                />
+                            </Grid>
                         </Grid>
                     </Grid>
                     <Grid container spacing={2}>
-                        {data.map((item, index) => (
+                        {isLoading && <PageLoader />}
+                        {tvShows.map((item, index) => (
                             <Grid item key={index}>
                                 <Link to={`/tvShows/details/${item.id}`}>
                                     <GenericCard

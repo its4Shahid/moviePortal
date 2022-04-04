@@ -70,3 +70,21 @@ export const getPeopleDetail = (id) => {
         url: `${API_URL}person/${id.payload}?api_key=${API_KEY}&language=en-US`,
     });
 };
+export const searchMovie = (name) => {
+    return axios.request({
+        method: 'get',
+        url: `${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${name.payload}&page=1&include_adult=false`,
+    });
+};
+export const searchTvShows = (name) => {
+    return axios.request({
+        method: 'get',
+        url: `${API_URL}search/tv?api_key=${API_KEY}&language=en-US&page=1&query=${name.payload}&include_adult=false`,
+    });
+};
+export const searchPeople = (name) => {
+    return axios.request({
+        method: 'get',
+        url: `${API_URL}search/person?api_key=${API_KEY}&language=en-US&query=${name.payload}&page=1&include_adult=false`,
+    });
+};

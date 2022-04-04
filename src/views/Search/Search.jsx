@@ -1,14 +1,12 @@
 import { Button, Grid, TextField } from '@mui/material';
 import React from 'react';
 
-function Search() {
+function Search(props) {
+    const { handleChange, handleClick, disableStatus, input } = props;
     return (
-        <Grid container justifyContent="center">
-            <Grid item xs={11}>
-                <TextField variant="outlined" fullWidth placeholder="Search"></TextField>
-                <Button variant="filled" color="primary">
-                    Search
-                </Button>
+        <Grid container justifyContent="left" direction="row" spacing={2}>
+            <Grid item xs={4}>
+                <TextField variant="outlined" onChange={handleChange} fullWidth placeholder="Search"></TextField>
             </Grid>
         </Grid>
     );

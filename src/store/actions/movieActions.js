@@ -6,6 +6,8 @@ export const GET_POPULAR_MOVIES_HANDLER_REQUEST = 'GET_POPULAR_MOVIES_HANDLER_RE
 export const GET_POPULAR_MOVIES_HANDLER_SUCCESS = 'GET_POPULAR_MOVIES_HANDLER_SUCCESS';
 export const GET_MOVIE_DETAIL_REQUEST = 'GET_MOVIE_DETAIL_REQUEST';
 export const GET_MOVIE_DETAIL_SUCCESS = 'GET_MOVIE_DETAIL_SUCCESS';
+export const SEARCH_MOVIE_REQUEST = 'SEARCH_MOVIE_REQUEST';
+export const SEARCH_MOVIE_SUCCESS = 'SEARCH_MOVIE_SUCCESS';
 
 export const setMovieRequest = () => {
     return {
@@ -45,4 +47,16 @@ export const getMovieDetailRequest = (id) => {
 };
 export const getMovieDetailSuccess = (movieDetail) => {
     return { type: GET_MOVIE_DETAIL_SUCCESS, payload: movieDetail };
+};
+export const searchMovieRequest = (name) => {
+    return {
+        type: SEARCH_MOVIE_REQUEST,
+        payload: name,
+    };
+};
+export const searchMovieSuccess = (movies) => {
+    return {
+        type: SEARCH_MOVIE_SUCCESS,
+        payload: movies,
+    };
 };

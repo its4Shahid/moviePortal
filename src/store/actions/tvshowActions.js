@@ -8,6 +8,8 @@ export const GET_TVSHOWS_DETAILS_REQUEST = 'GET_TVSHOWS_DETAILS';
 export const GET_TVSHOWS_DETAILS_SUCCESS = 'GET_TVSHOWS_DETAILS_SUCCESS';
 export const GET_TVSHOW_REVIEWS_REQUEST = 'GET_TVSHOW_REVIEWS_REQUEST';
 export const GET_TVSHOW_REVIEWS_SUCCESS = 'GET_TVSHOW_REVIEWS_SUCCESS';
+export const SEARCH_TVSHOW_REQUEST = 'SEARCH_TVSHOW_REQUEST';
+export const SEARCH_TVSHOW_SUCCESS = 'SEARCH_TVSHOW_SUCCESS';
 
 export const setTVShowsRequest = () => {
     return {
@@ -64,5 +66,17 @@ export const getTvShowReviewsSuccess = (reviews) => {
     return {
         type: GET_TVSHOW_REVIEWS_REQUEST,
         payload: reviews,
+    };
+};
+export const searchTvShowRequest = (name) => {
+    return {
+        type: SEARCH_TVSHOW_REQUEST,
+        payload: name,
+    };
+};
+export const searchTvShowSuccess = (TvShows) => {
+    return {
+        type: SEARCH_TVSHOW_SUCCESS,
+        payload: TvShows,
     };
 };

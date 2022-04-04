@@ -19,7 +19,7 @@ function App() {
             <Router>
                 <Header />
                 <Routes>
-                    <Route exact path="/" element={<Movies />}></Route>
+                    <Route exact path="/movies" element={<Movies />}></Route>
                     <Route exact path="/tvshows" element={<TVShows />}></Route>
                     <Route exact path="/people" element={<People />}></Route>
                     <Route exact path="/tvShows/details/:id" element={<TVShowDetail />}></Route>

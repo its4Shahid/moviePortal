@@ -25,7 +25,7 @@ const Header = () => {
                                         <img src={headerImg} alt="NoImg" />
                                     </a>
                                     <Stack direction="row">
-                                        <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
+                                        <Link to="/movies" style={{ color: 'white', textDecoration: 'none' }}>
                                             <Item>Movies</Item>
                                         </Link>
                                         <Link to="/tvshows" style={{ color: 'white', textDecoration: 'none' }}>

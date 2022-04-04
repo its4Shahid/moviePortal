@@ -4,21 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getPeopleDetialRequest } from '../../store/actions/peopleActions';
 import ImageSlide from '../ImageSlide/ImageSlide';
+import PageLoader from '../../components/PajeLoader/PajeLoader';
 
 const PeopleDetail = () => {
-    const data = useSelector((state) => state.people.people_detail);
+    const { people_detail, isLoading } = useSelector((state) => state.people);
     const dispatch = useDispatch();
     const { id } = useParams();
 
     useEffect(() => {
         dispatch(getPeopleDetialRequest(id));
     }, [id]);
-    console.log(data);
     const { profile_path, birthday, gender, known_for_department, place_of_birth, name, popularity, biography } =
-        data && data.length && data[0];
+        people_detail && people_detail.length && people_detail[0];
     return (
         <Box>
             <Container maxWidth="lg">
+                {isLoading && <PageLoader />}
                 <Grid container spacing={10}>
                     <Grid item xs={6} md={4} lg={3}>
                         <Box>
