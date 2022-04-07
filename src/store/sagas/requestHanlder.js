@@ -161,7 +161,7 @@ export function* hanldeSearchTvShow(payload) {
 }
 export function* handleSearchPeople(payload) {
     try {
-        const response = yield put(searchPeople, payload);
+        const response = yield call(searchPeople, payload);
         const { data } = response;
         yield put(searchPeopleSuccess(data.results));
     } catch (error) {

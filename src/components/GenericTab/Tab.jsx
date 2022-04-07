@@ -8,7 +8,7 @@ const GenericTab = (props) => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    const { all, popular, latest, getAllHandler, getPopularHandler, getLatestHandler } = props;
+    const { all, popular, latest, getAllHandler, getPopularHandler, getLatestHandler, tabStyle } = props;
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -18,6 +18,7 @@ const GenericTab = (props) => {
                 textColor="secondary"
                 indicatorColor="secondary"
                 aria-label="secondary tabs example"
+                sx={tabStyle}
             >
                 <Tab value="one" onClick={getAllHandler} label={all} />
                 <Tab value="two" onClick={getPopularHandler} label={popular} />

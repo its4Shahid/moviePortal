@@ -88,3 +88,9 @@ export const searchPeople = (name) => {
         url: `${API_URL}search/person?api_key=${API_KEY}&language=en-US&query=${name.payload}&page=1&include_adult=false`,
     });
 };
+export const multiSearch = (name) => {
+    return axios.request({
+        method: 'get',
+        url: `${API_URL}search/multi?api_key=${API_URL}&language=en-US&query=${name.payload}&page=1&include_adult=false`,
+    });
+};

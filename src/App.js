@@ -12,6 +12,7 @@ import People from './views/People';
 import TVShowDetail from './views/TVShowDetail';
 import MovieDetail from './views/MovieDetail';
 import PeopleDetail from './views/PeopleDetail/PeopleDetail';
+import Home from './views/Home';
 
 function App() {
     return (
@@ -19,12 +20,13 @@ function App() {
             <Router>
                 <Header />
                 <Routes>
-                    <Route exact path="/movies" element={<Movies />}></Route>
-                    <Route exact path="/tvshows" element={<TVShows />}></Route>
-                    <Route exact path="/people" element={<People />}></Route>
-                    <Route exact path="/tvShows/details/:id" element={<TVShowDetail />}></Route>
-                    <Route exact path="/movie/detail/:id" element={<MovieDetail />}></Route>
-                    <Route exact path="/people/detail/:id" element={<PeopleDetail />}></Route>
+                    <Route path="/" element={<Home />}></Route>
+                    <Route path="/movies" element={<Movies />}></Route>
+                    <Route path="/tvshows" element={<TVShows />}></Route>
+                    <Route path="/people" element={<People />}></Route>
+                    <Route path="/tvShows/details/:id" element={<TVShowDetail />}></Route>
+                    <Route path="/movie/detail/:id" element={<MovieDetail />}></Route>
+                    <Route path="/people/detail/:id" element={<PeopleDetail />}></Route>
                 </Routes>
             </Router>
         </Provider>

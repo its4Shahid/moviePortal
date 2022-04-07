@@ -18,7 +18,7 @@ function MovieDetail() {
 
     const { overview, title, poster_path, release_date } = movieDetail && movieDetail.length && movieDetail[0];
     return (
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" sx={{ marginTop: '20px' }}>
             {isLoading && <PageLoader />}
             <Detail title={title} image={poster_path} overview={overview} air_date={release_date} />
         </Container>

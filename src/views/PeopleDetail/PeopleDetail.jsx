@@ -18,7 +18,7 @@ const PeopleDetail = () => {
         people_detail && people_detail.length && people_detail[0];
     return (
         <Box>
-            <Container maxWidth="lg">
+            <Container maxWidth="lg" sx={{ marginTop: '20px' }}>
                 {isLoading && <PageLoader />}
                 <Grid container spacing={10}>
                     <Grid item xs={6} md={4} lg={3}>

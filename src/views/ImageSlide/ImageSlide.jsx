@@ -13,6 +13,15 @@ const data = [
     { id: 9, image: 'https://picsum.photos/200/300', title: 'Pics Art', subtitle: 'Subtitle' },
     { id: 10, image: 'https://picsum.photos/200/300', title: 'Pics Art', subtitle: 'Subtitle' },
     { id: 11, image: 'https://picsum.photos/200/300', title: 'Pics Art', subtitle: 'Subtitle' },
+    { id: 12, image: 'https://picsum.photos/200/300', title: 'Pics Art', subtitle: 'Subtitle' },
+    { id: 13, image: 'https://picsum.photos/200/300', title: 'Pics Art', subtitle: 'Subtitle' },
+    { id: 14, image: 'https://picsum.photos/200/300', title: 'Pics Art', subtitle: 'Subtitle' },
+    { id: 15, image: 'https://picsum.photos/200/300', title: 'Pics Art', subtitle: 'Subtitle' },
+    { id: 16, image: 'https://picsum.photos/200/300', title: 'Pics Art', subtitle: 'Subtitle' },
+    { id: 17, image: 'https://picsum.photos/200/300', title: 'Pics Art', subtitle: 'Subtitle' },
+    { id: 18, image: 'https://picsum.photos/200/300', title: 'Pics Art', subtitle: 'Subtitle' },
+    { id: 19, image: 'https://picsum.photos/200/300', title: 'Pics Art', subtitle: 'Subtitle' },
+    { id: 20, image: 'https://picsum.photos/200/300', title: 'Pics Art', subtitle: 'Subtitle' },
 ];
 
 function ImageSlide() {

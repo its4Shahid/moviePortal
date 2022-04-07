@@ -18,7 +18,7 @@ const people = (state = intialValue, { payload, type }) => {
         case SET_PEOPLE_HANDLER_REQUEST:
             return { ...state, isLoading: true };
         case SET_PEOPLE_HANDLER_SUCCESS:
-            return { ...state, peopleData: [...payload, ...state.peopleData], isLoading: false };
+            return { ...state, peopleData: [...payload], isLoading: false };
         case GET_PEOPLE_DETAIL_REQUEST:
             return { ...state, isLoading: true };
         case GET_PEOPLE_DETAIL_SUCCESS:

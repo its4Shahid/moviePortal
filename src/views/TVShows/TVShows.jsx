@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Grid } from '@mui/material';
+import { Container, Grid, Box } from '@mui/material';
 import React from 'react';
 import GenericCard from '../../components/GenericCard';
 import GenericTab from '../../components/GenericTab';
@@ -14,12 +14,13 @@ import { Link } from 'react-router-dom';
 import PageLoader from '../../components/PajeLoader/PajeLoader';
 import GenericTextField from '../../components/TextField';
 import GenericButton from '../../components/Button';
+import Search from '../Search';
 
 const TVShows = () => {
     const { tvShows, isLoading } = useSelector((state) => state.TVShows);
     const dispatch = useDispatch();
     const [input, setInput] = useState('');
-    const [showType, setShowType] = useState('all'); //all,trending,recent movie type
+    const [showType, setShowType] = useState('all');
     useEffect(() => {
         if (showType === 'all') {
             dispatch(setTVShowsRequest());
@@ -29,6 +30,7 @@ const TVShows = () => {
             dispatch(getTopRatedTvShowsRequest());
         } else if (showType === 'search') {
             dispatch(searchTvShowRequest(input));
+            setShowType('');
         }
     }, [showType]);
 
@@ -48,52 +50,47 @@ const TVShows = () => {
         setShowType('search');
     };
     return (
-        <>
-            <Grid container justifyContent="center" spacing={3}>
-                <Grid item xs={11}>
-                    <Grid container justifyContent="center">
+        <Box>
+            <Search handleChange={handleChange} handleClick={handleClick} inputText={input} />
+            <Container maxWidth="xl" sx={{ marginTop: '20px' }}>
+                <Grid container justifyContent="center" spacing={3}>
+                    <Grid item xs={11}>
                         <Grid container justifyContent="center">
-                            <Grid item xs={12}>
-                                <Grid item xs={8} sm={10} lg={8}>
-                                    <GenericTextField handleChange={handleChange} placeHolder="Search" />
-                                </Grid>
-                                <Grid item xs={4} sm={2} lg={4}>
-                                    <GenericButton handleClick={handleClick} input={input} title="Search" />
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid container justifyContent="center">
-                            <Grid item>
-                                {isLoading && <PageLoader />}
-                                <GenericTab
-                                    all="ALL TV SHOWS"
-                                    popular="POPULAR TV SHOWS"
-                                    latest="TOP RATED"
-                                    getAllHandler={getAllHandler}
-                                    getPopularHandler={getPopularHandler}
-                                    getLatestHandler={getLatestHandler}
-                                />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid container spacing={2}>
-                        {isLoading && <PageLoader />}
-                        {tvShows.map((item, index) => (
-                            <Grid item key={index}>
-                                <Link to={`/tvShows/details/${item.id}`}>
-                                    <GenericCard
-                                        id={item.id}
-                                        title={item.name}
-                                        subtitle={item.first_air_date}
-                                        image={item.poster_path && `https://image.tmdb.org/t/p/w300${item.poster_path}`}
+                            <Grid container justifyContent="center">
+                                <Grid item>
+                                    {isLoading && <PageLoader />}
+                                    <GenericTab
+                                        all="ALL TV SHOWS"
+                                        popular="POPULAR TV SHOWS"
+                                        latest="TOP RATED"
+                                        getAllHandler={getAllHandler}
+                                        getPopularHandler={getPopularHandler}
+                                        getLatestHandler={getLatestHandler}
                                     />
-                                </Link>
+                                </Grid>
                             </Grid>
-                        ))}
+                        </Grid>
+                        <Grid container spacing={2}>
+                            {isLoading && <PageLoader />}
+                            {tvShows.map((item, index) => (
+                                <Grid item key={index}>
+                                    <Link to={`/tvShows/details/${item.id}`}>
+                                        <GenericCard
+                                            id={item.id}
+                                            title={item.name}
+                                            subtitle={item.first_air_date}
+                                            image={
+                                                item.poster_path && `https://image.tmdb.org/t/p/w300${item.poster_path}`
+                                            }
+                                        />
+                                    </Link>
+                                </Grid>
+                            ))}
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-        </>
+            </Container>
+        </Box>
     );
 };
 export default TVShows;

@@ -16,6 +16,8 @@ import PageLoader from '../../components/PajeLoader/PajeLoader';
 
 import GenericTextField from '../../components/TextField';
 import GenericButton from '../../components/Button';
+import Search from '../Search';
+import SimpleAccordion from '../../components/SimpleAccordian';
 
 const Movies = () => {
     const { movies, isLoading } = useSelector((state) => state.movie);
@@ -32,6 +34,7 @@ const Movies = () => {
             dispatch(getPopularMoviesRequest());
         } else if (movieType === 'search') {
             dispatch(searchMovieRequest(input));
+            setMovieType('');
         }
     }, [movieType]);
 
@@ -53,52 +56,46 @@ const Movies = () => {
     };
 
     return (
-        <Container maxWidth="xl">
-            <Grid container justifyContent="center" spacing={3}>
-                <Grid item xs={11}>
-                    <Grid container justifyContent="center">
-                        <Grid item xs={12}>
-                            <Grid item xs={8} sm={10} lg={8}>
-                                <GenericTextField handleChange={handleChange} placeHolder="Search" />
-                            </Grid>
-                            <Grid item xs={4} sm={2} lg={4}>
-                                <GenericButton handleClick={handleClick} input={input} title="Search" />
+        <Box>
+            <Search handleChange={handleChange} handleClick={handleClick} inputText={input} />
+            <SimpleAccordion />
+            <Container maxWidth="xl" sx={{ marginTop: '20px' }}>
+                <Grid container justifyContent="center" spacing={3}>
+                    <Grid item xs={11}>
+                        <Grid container justifyContent="center">
+                            <Grid item>
+                                {isLoading && <PageLoader />}
+                                <GenericTab
+                                    all="ALL MOVIES"
+                                    popular="POPULAR MOVIES"
+                                    latest="LATEST MOVIES"
+                                    getAllHandler={getAllHandler}
+                                    getPopularHandler={getPopularHandler}
+                                    getLatestHandler={getLatestHandler}
+                                />
                             </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid container justifyContent="center">
-                        <Grid item>
+                        <Grid container spacing={1}>
                             {isLoading && <PageLoader />}
-                            <GenericTab
-                                all="ALL MOVIES"
-                                popular="POPULAR MOVIES"
-                                latest="LATEST MOVIES"
-                                getAllHandler={getAllHandler}
-                                getPopularHandler={getPopularHandler}
-                                getLatestHandler={getLatestHandler}
-                            />
+                            {movies &&
+                                movies.length &&
+                                movies.map((item, index) => (
+                                    <Grid xs={4} md={4} lg={3} item key={index} sx={{ widt: '60%' }}>
+                                        <Link to={`/movie/detail/${item.id}`}>
+                                            <GenericCard
+                                                id={item.id}
+                                                title={item.title}
+                                                subtitle={item.release_date}
+                                                image={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                                            />
+                                        </Link>
+                                    </Grid>
+                                ))}
                         </Grid>
-                    </Grid>
-                    <Grid container spacing={1}>
-                        {isLoading && <PageLoader />}
-                        {movies &&
-                            movies.length &&
-                            movies.map((item, index) => (
-                                <Grid xs={4} md={4} lg={3} item key={index} sx={{ widt: '60%' }}>
-                                    <Link to={`/movie/detail/${item.id}`}>
-                                        <GenericCard
-                                            id={item.id}
-                                            title={item.title}
-                                            subtitle={item.release_date}
-                                            image={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                                        />
-                                    </Link>
-                                </Grid>
-                            ))}
                     </Grid>
                 </Grid>
-            </Grid>
-        </Container>
+            </Container>
+        </Box>
     );
 };
 export default Movies;
